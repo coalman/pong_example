@@ -1,0 +1,10 @@
+{
+  "name": "pong",
+  "version": "0.0.0",
+  "description": "A simple pong game written in javascript using the phaser library.",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-connect": "~0.6.0"
+  }
+}
