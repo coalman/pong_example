@@ -22,15 +22,23 @@ States.Game.prototype = {
         this.paddle0 = add.sprite(this.game.world.centerX,
             this.game.world.height - 50, 'paddle0');
         this.paddle0.anchor.setTo(0.5, 0.5);
+        this.paddle0.body.bounce.setTo(1, 1);
+        this.paddle0.body.immovable = true;
+        this.paddle0.body.collideWorldBounds = true;
         this.paddles.add(this.paddle0);
 
         this.paddle1 = add.sprite(this.game.world.centerX,
             50, 'paddle1');
         this.paddle1.anchor.setTo(0.5, 0.5);
+        this.paddle1.body.bounce.setTo(1, 1);
+        this.paddle1.body.immovable = true;
+        this.paddle1.body.collideWorldBounds = true;
         this.paddles.add(this.paddle1);
 
         this.ball = add.sprite(this.game.world.centerX,
             this.game.world.centerY, 'ball0');
+        this.ball.body.bounce.setTo(1, 1);
+        this.ball.body.collideWorldBounds = true;
         this.ball.anchor.setTo(0.5, 0.5);
     },
 
@@ -67,7 +75,7 @@ States.Game.prototype = {
     },
 
     ballCollision: function() {
-        this.ball.body.velocity.y *= -1;
+        
     }
 };
 
