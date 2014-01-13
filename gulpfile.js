@@ -3,7 +3,8 @@ var gulp = require('gulp'),
 	lr = require('tiny-lr'),
 	refresh = require('gulp-livereload'),
 	jshint = require('gulp-jshint'),
-	stylish = require('jshint-stylish');
+	stylish = require('jshint-stylish'),
+	open = require('open');
 
 var server = lr();
 
@@ -22,8 +23,12 @@ gulp.task('livereload', function() {
 	});
 });
 
+gulp.task('open', function() {
+	open('http://localhost:3000');
+});
+
 gulp.task('dev', function() {
-	gulp.run('livereload', 'lint');
+	gulp.run('livereload', 'lint', 'open');
 
 	gulp.watch('src/js/**/*.js', function(ev) {
 		gulp.run('lint');
@@ -32,13 +37,11 @@ gulp.task('dev', function() {
 	});
 
 	gulp.watch('src/**/*.html', function(ev) {
-		gulp.run('html');
 		gulp.src('src/**/*.html')
 			.pipe(refresh(server));
 	});
 
 	gulp.watch('src/img/**', function(ev) {
-		gulp.run('img');
 		gulp.src('src/img/**')
 			.pipe(refresh(server));
 	});
