@@ -19,3 +19,10 @@ Once you have these dependencies installed, you can run this example by
 entering the following into you cmd:
 
     $ gulp dev
+
+Helpful Links
+-------------
+
+* [phaser.io](http://phaser.io)
+* [Phaser Api Docs](http://gametest.mobi/phaser/docs/index.html)
+* [Phaser Examples](http://gametest.mobi/phaser/examples/)
