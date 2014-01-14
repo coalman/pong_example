@@ -1,4 +1,9 @@
 var States = {};
+var score = 0;
+var scoreText;
+
+var score1 = 0;
+var scoreText1;
 
 States.Game = function(game) {
     this.game = game;
@@ -39,6 +44,10 @@ States.Game.prototype = {
             this.game.world.centerY, 'ball0');
         this.ball.body.bounce.setTo(1, 1);
         this.ball.anchor.setTo(0.5, 0.5);
+
+        scoreText = this.game.add.text(16, 16, 'score: 0', { font: '32px arial', fill: '#00FFFF' });
+        scoreText1 = this.game.add.text(16, 500, 'score: 0', { font: '32px arial', fill: '#00FFFF' });
+
     },
 
     update: function() {
@@ -100,6 +109,8 @@ States.Game.prototype = {
             ball.body.y = this.game.world.centerY;
             ball.body.velocity.x = ball.body.velocity.y = 0;
             this.ballAlive = false;
+            score1 += 1;
+            scoreText1.setText('score: '+score1);
         }
         else if (ball.body.y > this.game.world.bounds.bottom)
         {
@@ -108,6 +119,8 @@ States.Game.prototype = {
             ball.body.y = this.game.world.centerY;
             ball.body.velocity.x = ball.body.velocity.y = 0;
             this.ballAlive = false;
+            score += 1;
+            scoreText.setText('score: '+score);
         }
     }
 };
