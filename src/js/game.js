@@ -38,7 +38,6 @@ States.Game.prototype = {
         this.ball = add.sprite(this.game.world.centerX,
             this.game.world.centerY, 'ball0');
         this.ball.body.bounce.setTo(1, 1);
-        this.ball.body.collideWorldBounds = true;
         this.ball.anchor.setTo(0.5, 0.5);
     },
 
@@ -71,6 +70,7 @@ States.Game.prototype = {
         if (this.ballAlive) {
             this.game.physics.collide(this.ball, this.paddles,
                 this.ballHitPaddle, null, this);
+            this.ballWorldCheck(this.ball);
         }
     },
 
@@ -79,6 +79,32 @@ States.Game.prototype = {
             Math.max(0.2, Math.random()) * Phaser.Math.randomSign();
 
         ball.body.velocity.x = 10 * delta;
+    },
+
+    ballWorldCheck: function(ball) {
+        if (ball.body.x < this.game.world.bounds.x)
+        {
+            ball.body.x = this.game.world.bounds.x;
+            ball.body.velocity.x *= -ball.body.bounce.x;
+        }
+        else if (this.right > this.game.world.bounds.right)
+        {
+            ball.body.x = this.game.world.bounds.right - this.width;
+            ball.body.velocity.x *= -ball.body.bounce.x;
+        }
+
+        if (this.y < this.game.world.bounds.y)
+        {
+            // bottom player scored
+            ball.body.x = this.game.world.centerX;
+            ball.body.y = this.game.world.centerY;
+        }
+        else if (this.bottom > this.game.world.bounds.bottom)
+        {
+            // top player scored
+            ball.body.x = this.game.world.centerX;
+            ball.body.y = this.game.world.centerY;
+        }
     }
 };
 
