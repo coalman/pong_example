@@ -87,23 +87,27 @@ States.Game.prototype = {
             ball.body.x = this.game.world.bounds.x;
             ball.body.velocity.x *= -ball.body.bounce.x;
         }
-        else if (this.right > this.game.world.bounds.right)
+        else if (ball.body.x > this.game.world.bounds.right)
         {
             ball.body.x = this.game.world.bounds.right - this.width;
             ball.body.velocity.x *= -ball.body.bounce.x;
         }
 
-        if (this.y < this.game.world.bounds.y)
+        if (ball.body.y < this.game.world.bounds.y)
         {
             // bottom player scored
             ball.body.x = this.game.world.centerX;
             ball.body.y = this.game.world.centerY;
+            ball.body.velocity.x = ball.body.velocity.y = 0;
+            this.ballAlive = false;
         }
-        else if (this.bottom > this.game.world.bounds.bottom)
+        else if (ball.body.y > this.game.world.bounds.bottom)
         {
             // top player scored
             ball.body.x = this.game.world.centerX;
             ball.body.y = this.game.world.centerY;
+            ball.body.velocity.x = ball.body.velocity.y = 0;
+            this.ballAlive = false;
         }
     }
 };
