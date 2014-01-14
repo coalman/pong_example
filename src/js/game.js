@@ -70,12 +70,15 @@ States.Game.prototype = {
 
         if (this.ballAlive) {
             this.game.physics.collide(this.ball, this.paddles,
-                this.ballCollision, null, this);
+                this.ballHitPaddle, null, this);
         }
     },
 
-    ballCollision: function() {
-        
+    ballHitPaddle: function(ball, paddle) {
+        var delta = ball.x - paddle.x ||
+            Math.max(0.2, Math.random()) * Phaser.Math.randomSign();
+
+        ball.body.velocity.x = 10 * delta;
     }
 };
 
