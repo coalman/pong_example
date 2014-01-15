@@ -20,8 +20,10 @@ States.Game.prototype.create = function() {
     this.ball.init();
 
     for (var i = 0; i < 2; i++) {
+        var offset = this.game.world.width - (50 * 2);
+        offset *= i;
+        
         var player = new Player(this.game);
-        var offset = i * this.game.world.width / 2;
         player.create(16 + offset, 16);
         this.players.push(player);
 
@@ -110,7 +112,7 @@ States.Game.prototype.update = function() {
 // };
 
 window.onload = function() {
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+    game = new Phaser.Game(800, 600, Phaser.AUTO, '');
     game.state.add('Game', States.Game);
     game.state.start('Game');
 };
