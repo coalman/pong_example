@@ -38,3 +38,7 @@ Ball.prototype.reset = function() {
     this.sprite.body.y = this.game.world.centerY;
     this.sprite.body.velocity.x = this.sprite.body.velocity.y = 0;
 };
+
+Ball.prototype.start = function() {
+	this.sprite.body.velocity.x = 200;
+};

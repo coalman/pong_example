@@ -33,7 +33,10 @@ States.Game.prototype.create = function() {
     }
 };
 States.Game.prototype.update = function() {
-
+	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) &&
+		this.ball.sprite.body.velocity.x == 0) {
+		this.ball.start();
+	}
 };
 // States.Game.prototype = {
 
