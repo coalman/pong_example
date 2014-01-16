@@ -50,28 +50,12 @@ States.Game.prototype.update = function() {
                 null, this.paddles[i]);
         }
     }
+
+    this.paddles[0].processKeyInput(
+        Phaser.Keyboard.A, Phaser.Keyboard.S);
+    this.paddles[1].processKeyInput(
+        Phaser.Keyboard.K, Phaser.Keyboard.L);
 };
-// States.Game.prototype = {
-//     update: function() {
-//         var input = 0;
-//         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-//             input -= 250;
-//         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-//             input += 250;
-//         }
-
-//         this.paddle0.body.velocity.x = input;
-//         input = 0;
-
-//         if (this.game.input.keyboard.isDown(Phaser.Keyboard.K)) {
-//             input -= 250;
-//         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.L)) {
-//             input += 250;
-//         }
-
-//         this.paddle1.body.velocity.x = input;
-//     },
-// };
 
 window.onload = function() {
     game = new Phaser.Game(800, 600, Phaser.AUTO, '');

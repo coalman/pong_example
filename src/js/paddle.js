@@ -20,3 +20,15 @@ Paddle.prototype.hitBall = function(ball, paddle) {
 
     ball.body.velocity.y = 10 * delta;
 };
+
+Paddle.prototype.processKeyInput = function(upKey, downKey) {
+	var input = 0;
+
+	if (this.game.input.keyboard.isDown(upKey)) {
+		input -= 250;
+	} else if (this.game.input.keyboard.isDown(downKey)) {
+		input += 250;
+	}
+
+	this.sprite.body.velocity.y = input;
+};
