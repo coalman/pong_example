@@ -14,11 +14,11 @@ Ball.prototype.init = function() {
 Ball.prototype.boundsCheck = function(onScore) {
 	if (this.sprite.body.x < this.game.world.bounds.x)
     {
-        onScore(this, 0);
+        onScore(this, 1);
     }
     else if (this.sprite.body.x > this.game.world.bounds.right)
     {
-        onScore(this, 1);
+        onScore(this, 0);
     }
 
     if (this.sprite.body.y < this.game.world.bounds.y)

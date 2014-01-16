@@ -34,12 +34,24 @@ States.Game.prototype.create = function() {
 };
 States.Game.prototype.update = function() {
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) &&
-		this.ball.sprite.body.velocity.x == 0) {
+		this.ball.sprite.body.velocity.x === 0) {
 		this.ball.start();
 	}
+
+    if (this.ball.sprite.body.velocity.x !== 0) {
+        this.ball.boundsCheck(function onScore(ball, scorer) {
+            this.players[scorer].onScore(1);
+            ball.reset();
+        }.bind(this));
+
+        for (var i = 0, len = this.paddles.length; i < len; i++) {
+            this.game.physics.collide(this.ball.sprite,
+                this.paddles[i].sprite, this.paddles[i].hitBall,
+                null, this.paddles[i]);
+        }
+    }
 };
 // States.Game.prototype = {
-
 //     update: function() {
 //         var input = 0;
 //         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A)) {
@@ -58,60 +70,7 @@ States.Game.prototype.update = function() {
 //         }
 
 //         this.paddle1.body.velocity.x = input;
-
-//         if (!this.ballAlive && 
-//             this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-//             this.ballAlive = true;
-
-//             this.ball.body.velocity.x = 250;
-//         }
-
-//         if (this.ballAlive) {
-//             this.game.physics.collide(this.ball, this.paddles,
-//                 this.ballHitPaddle, null, this);
-//             this.ballWorldCheck(this.ball);
-//         }
 //     },
-
-//     ballHitPaddle: function(ball, paddle) {
-//         var delta = ball.y - paddle.y ||
-//             Math.max(0.2, Math.random()) * Phaser.Math.randomSign();
-
-//         ball.body.velocity.y = 10 * delta;
-//     },
-
-//     ballWorldCheck: function(ball) {
-//         if (ball.body.x < this.game.world.bounds.x)
-//         {
-//             this.onScore(ball, null);
-//         }
-//         else if (ball.body.x > this.game.world.bounds.right)
-//         {
-//             this.onScore(ball, null);
-//         }
-
-//         if (ball.body.y < this.game.world.bounds.y)
-//         {
-//             ball.body.y = this.game.world.bounds.y;
-//             ball.body.velocity.y *= -ball.body.bounce.y;
-//         }
-//         else if (ball.body.y > this.game.world.bounds.bottom)
-//         {
-//             ball.body.y = this.game.world.bounds.bottom - ball.width;
-//             ball.body.velocity.y *= -ball.body.bounce.y;
-//         }
-//     },
-
-//     onScore: function(ball, player) {
-//         // reset ball
-//         ball.body.x = this.game.world.centerX;
-//         ball.body.y = this.game.world.centerY;
-//         ball.body.velocity.x = ball.body.velocity.y = 0;
-//         this.ballAlive = false;
-
-//         score += 1;
-//         scoreText.setText('score:' + score);
-//     }
 // };
 
 window.onload = function() {
